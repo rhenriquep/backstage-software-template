@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.component_id }}
+  description: ${{ values.description }}
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - python
+    - fastapi
+    - api
+spec:
+  type: service
+  lifecycle: ${{ values.environment }}
+  owner: ${{ values.owner }}
+  {%- if values.system %}
+  system: ${{ values.system }}
+  {%- endif %}
+
