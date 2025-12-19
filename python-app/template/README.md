@@ -42,6 +42,9 @@ pytest
 ├── k8s/
 │   ├── deployment.yaml
 │   └── service.yaml
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── requirements.txt
 ├── catalog-info.yaml
 ├── mkdocs.yaml
@@ -68,6 +71,16 @@ The deployment includes:
 - Configurable CPU and memory resources
 - Liveness and readiness probes
 - Environment-specific configuration
+
+## CI/CD
+
+The project includes a GitHub Actions workflow (`.github/workflows/ci.yml`) that:
+
+- Runs tests on push and pull requests
+- Tests against multiple Python versions (3.9, 3.10, 3.11)
+- Checks code formatting with Black
+
+The workflow automatically runs when you push to `main` or `develop` branches or create a pull request.
 
 ## Documentation
 
