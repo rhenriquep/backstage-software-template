@@ -16,3 +16,4 @@ async def get_items():
     """Get items endpoint."""
     return {"items": []}
 
+

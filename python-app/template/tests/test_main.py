@@ -28,3 +28,4 @@ def test_api_root():
     assert response.status_code == 200
     assert "message" in response.json()
 
+

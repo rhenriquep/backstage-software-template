@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${{ values.component_id }}
+  namespace: ${{ values.namespace }}
+  labels:
+    app: ${{ values.component_id }}
+    environment: ${{ values.environment }}
+spec:
+  replicas: ${{ values.replicas }}
+  selector:
+    matchLabels:
+      app: ${{ values.component_id }}
+  template:
+    metadata:
+      labels:
+        app: ${{ values.component_id }}
+        environment: ${{ values.environment }}
+    spec:
+      containers:
+      - name: ${{ values.component_id }}
+        image: ${{ values.component_id }}:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        resources:
+          requests:
+            cpu: ${{ values.cpu_request }}
+            memory: ${{ values.memory_request }}
+          limits:
+            cpu: ${{ values.cpu_limit }}
+            memory: ${{ values.memory_limit }}
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        env:
+        - name: ENVIRONMENT
+          value: ${{ values.environment }}
+
+

@@ -15,3 +15,4 @@ EXPOSE 8000
 # Run the application
 CMD ["uvicorn", "src.${{ values.component_id | replace('-', '_') }}.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
+

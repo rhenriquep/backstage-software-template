@@ -59,6 +59,39 @@ spec:
             - Production
           default: development
 
+    - title: Kubernetes Configuration
+      properties:
+        namespace:
+          title: Namespace
+          type: string
+          description: Kubernetes namespace where the application will be deployed
+          default: default
+        cpuRequest:
+          title: CPU Request
+          type: string
+          description: CPU request (e.g., 100m, 0.5, 1)
+          default: 100m
+        cpuLimit:
+          title: CPU Limit
+          type: string
+          description: CPU limit (e.g., 500m, 1, 2)
+          default: 500m
+        memoryRequest:
+          title: Memory Request
+          type: string
+          description: Memory request (e.g., 128Mi, 256Mi, 512Mi)
+          default: 128Mi
+        memoryLimit:
+          title: Memory Limit
+          type: string
+          description: Memory limit (e.g., 256Mi, 512Mi, 1Gi)
+          default: 256Mi
+        replicas:
+          title: Replicas
+          type: integer
+          description: Number of replicas
+          default: 1
+
     - title: Choose a location
       required:
         - repoUrl
@@ -84,6 +117,12 @@ spec:
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
           environment: ${{ parameters.environment }}
+          namespace: ${{ parameters.namespace }}
+          cpu_request: ${{ parameters.cpuRequest }}
+          cpu_limit: ${{ parameters.cpuLimit }}
+          memory_request: ${{ parameters.memoryRequest }}
+          memory_limit: ${{ parameters.memoryLimit }}
+          replicas: ${{ parameters.replicas }}
 
     - id: publish
       name: Publish

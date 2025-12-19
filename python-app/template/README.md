@@ -39,11 +39,35 @@ pytest
 │   └── test_main.py
 ├── docs/
 │   └── index.md
+├── k8s/
+│   ├── deployment.yaml
+│   └── service.yaml
 ├── requirements.txt
 ├── catalog-info.yaml
 ├── mkdocs.yaml
+├── Dockerfile
 └── README.md
 ```
+
+## Kubernetes Deployment
+
+The project includes Kubernetes manifests in the `k8s/` directory:
+
+- **deployment.yaml**: Kubernetes Deployment with configurable resources, probes, and replicas
+- **service.yaml**: Kubernetes Service exposing the application
+
+### Deploy to Kubernetes
+
+```bash
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+```
+
+The deployment includes:
+- Health checks using the `/health` endpoint
+- Configurable CPU and memory resources
+- Liveness and readiness probes
+- Environment-specific configuration
 
 ## Documentation
 
